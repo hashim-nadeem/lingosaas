@@ -1,15 +1,53 @@
+<div align="center">
+
 # LingoSaaS
 
-**One Platform. Every Market.**
+### One Platform. Every Market.
 
-A multilingual, multi-tenant SaaS starter that serves the United States, Mexico and the United Arab Emirates from a single codebase — including a genuine right-to-left layout mode for Arabic, per-market regional formatting, and translated database content.
+A multilingual, multi-tenant SaaS platform that serves **the United States, Mexico and the United Arab Emirates** from a single codebase — with a genuine right-to-left layout mode for Arabic, per-market regional formatting, and translated database content.
 
-Localization here is an architectural decision, not a translation file. Language is the easy part; currency, date order, numeral systems, writing direction, tenant isolation and role resolution are the parts that actually decide whether a product feels native in a market.
+[![CI](https://github.com/hashim-nadeem/lingosaas/actions/workflows/ci.yml/badge.svg)](https://github.com/hashim-nadeem/lingosaas/actions/workflows/ci.yml)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Tests](https://img.shields.io/badge/tests-60%20passing-3FB950)](#testing)
+
+**[Live demo](#)** · **[Architecture](#architecture)** · **[Quick start](#quick-start-docker)**
+
+`en-US` 🇺🇸 · `es-MX` 🇲🇽 · `ar-AE` 🇦🇪
+
+</div>
+
+---
+
+> **Localization is not a translation file.**
+>
+> Language is the easy part. Currency, date order, numeral systems, writing
+> direction, tenant isolation and role resolution are what actually decide
+> whether a product feels native in a market — and each of them is an
+> architectural decision, not a string lookup.
+
+The same data, rendered by the same components, in three markets:
+
+| | 🇺🇸 en-US | 🇲🇽 es-MX | 🇦🇪 ar-AE |
+|---|---|---|---|
+| **Currency** | `$1,250.50` | `$1,250.50` | `1,250.50 د.إ` |
+| **Date** | `March 14, 2026` | `14 de marzo de 2026` | `14 مارس 2026` |
+| **Relative time** | `3 days ago` | `hace 3 días` | `قبل 3 أيام` |
+| **Direction** | LTR | LTR | **RTL** |
+| **Typeface** | Inter | Inter | IBM Plex Sans Arabic |
+
+None of that is hardcoded. Every value comes from `Intl`, driven by one locale
+config file.
 
 ---
 
 ## Table of contents
 
+- [Engineering highlights](#engineering-highlights)
 - [Features](#features)
 - [Technology stack](#technology-stack)
 - [Screenshots](#screenshots)
@@ -36,10 +74,84 @@ Localization here is an architectural decision, not a translation file. Language
 
 ---
 
+## Engineering highlights
+
+The five decisions in this codebase that are worth actually discussing.
+
+### 1. Cross-tenant access is impossible by construction, not by discipline
+
+No function in the data-access layer accepts a `workspaceId`. There is no
+parameter to forge.
+
+```ts
+// Every query and every mutation starts here. The workspace is derived,
+// never supplied.
+const { user, workspace, role } = await requireWorkspace();
+```
+
+The active workspace arrives as a cookie, which is client-controlled and
+therefore treated as a **hint** — the membership lookup is what authorizes
+access. A forged cookie naming someone else's workspace matches no membership
+row and falls back to the user's own.
+
+A resource that exists in another tenant returns **404, not 403**. A 403 would
+confirm it exists. [Proven by integration tests](#testing) against real Postgres.
+
+### 2. The role is deliberately not in the JWT
+
+The session token carries the user id and nothing else. Roles are re-read on
+every request.
+
+A role baked into a token goes stale the moment an admin demotes someone — that
+is a privilege-escalation bug, not a caching trade-off.
+
+### 3. RTL is a layout mode, not mirrored CSS
+
+`dir` is set on `<html>` from the locale config, and spacing uses **logical
+properties** throughout — `ms-`/`me-`, `ps-`/`pe-`, `inset-inline-start`,
+`text-start`. Physical `ml-`/`pr-` do not appear in layout code, which the repo
+can prove:
+
+```bash
+$ grep -rE 'className="[^"]*\b(ml|mr|pl|pr)-[0-9]' src/
+# (no matches)
+```
+
+Directional icons carry `.rtl-flip` and mirror; brand marks deliberately do not.
+Dropdowns open toward the reading edge. Email addresses stay `dir="ltr"` even on
+Arabic pages, because an RTL-rendered address reads wrong.
+
+### 4. One fallback chain, stated once, surfaced honestly
+
+```ts
+pickTranslation(rows, locale)
+//  1. the requested locale
+//  2. en-US
+//  3. whatever exists
+//  4. null → callers render a designed "unavailable" state
+```
+
+When a fallback is used the UI **says so** rather than pretending the content is
+translated. Notifications work from the other direction: they store a message
+*key* plus params, never rendered prose, so a notification written while the
+reader was on English reads correctly in Arabic after they switch.
+
+### 5. Native platform features over dependencies
+
+`<dialog>` for modals — focus trapping, Escape, top-layer stacking, all correct
+for free. `<details>` for the FAQ — keyboard accessible, findable by in-page
+search, works without JavaScript. The `form` attribute to place a submit button
+outside its form. Node's `loadEnvFile` instead of `dotenv`.
+
+No Three.js, no Lenis, no accordion library, no scroll-jacking. All 12 marketing
+pages prerender as static HTML.
+
+---
+
 ## Features
 
 **Internationalization**
-- Three locales out of the box: `en-US`, `es-MX`, `ar-AE` — 305 message keys each, verified in CI to match exactly
+- Three locales out of the box: `en-US`, `es-MX`, `ar-AE` — 305 message keys each, with key *and* ICU-placeholder parity enforced by tests
 - Locale-prefixed routes (`/en-US/projects`, `/ar-AE/projects`) that stay put when you switch language
 - Full RTL layout mode for Arabic — not mirrored CSS, but logical properties throughout and deliberately handled directional icons
 - Regional formatting via `Intl`: currency, decimal and thousands separators, date order, relative time
