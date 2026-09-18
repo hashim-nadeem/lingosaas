@@ -15,7 +15,11 @@ A multilingual, multi-tenant SaaS platform that serves **the United States, Mexi
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Tests](https://img.shields.io/badge/tests-60%20passing-3FB950)](#testing)
 
-**[Live demo](#)** · **[Architecture](#architecture)** · **[Quick start](#quick-start-docker)**
+### [**▶ Live demo**](https://lingosaas.vercel.app)
+
+**[Architecture](#architecture)** · **[Quick start](#quick-start-docker)** · **[Engineering highlights](#engineering-highlights)**
+
+Sign in with `demo@lingosaas.dev` / `demo1234`
 
 `en-US` 🇺🇸 · `es-MX` 🇲🇽 · `ar-AE` 🇦🇪
 
@@ -383,7 +387,13 @@ development only — nothing in production depends on it.
 
    ```bash
    DATABASE_URL="<production url>" npx prisma migrate deploy
+   DATABASE_URL="<production url>" npx prisma db seed   # optional demo data
    ```
+
+   > **Neon note.** Drop `channel_binding=require` from the connection string
+   > used for migrations. Prisma's migration engine connects natively rather
+   > than through the driver adapter and rejects that parameter with a
+   > misleading `P1001: Can't reach database server`. Keep `sslmode=require`.
 
    Do not run `prisma migrate dev` against production — it can reset data.
 
