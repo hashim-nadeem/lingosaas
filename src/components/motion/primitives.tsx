@@ -80,7 +80,7 @@ const staggerChildReduced: Variants = {
   show: { opacity: 1, transition: { duration: 0.15 } },
 };
 
-/** Wrap a list; each `<Stagger.Item>` child enters in sequence. */
+/** Wrap a list; each `<StaggerItem>` child enters in sequence. */
 export function Stagger({
   children,
   className,
@@ -104,7 +104,12 @@ export function Stagger({
   );
 }
 
-function StaggerItem({
+/**
+ * A separate named export, NOT `Stagger.Item`. A client component reaching a
+ * server component is a module proxy — static properties hung off it come back
+ * `undefined`, which React reports as "element type is invalid".
+ */
+export function StaggerItem({
   children,
   className,
   as = "div",
@@ -121,8 +126,6 @@ function StaggerItem({
     </Comp>
   );
 }
-
-Stagger.Item = StaggerItem;
 
 /** Section heading block used across the marketing page. */
 export function SectionHeading({

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { privateMetadata } from "@/lib/i18n/metadata";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { RegisterForm } from "@/components/auth/auth-forms";
@@ -11,8 +12,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata.register" });
-  return { title: t("title"), description: t("description"), robots: { index: false } };
+  return privateMetadata(locale, "register");
 }
 
 export default async function RegisterPage({ params }: { params: Promise<{ locale: string }> }) {

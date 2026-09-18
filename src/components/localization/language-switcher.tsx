@@ -2,23 +2,21 @@
 
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { localeList, type Locale } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils/cn";
 
 /**
- * Switching language keeps you on the same page with the same params —
- * `/en-US/projects/abc` becomes `/ar-AE/projects/abc`, not the home page.
- * `usePathname` from our navigation module returns the locale-stripped path,
- * and `params` carries the dynamic segments back through.
+ * Switching language keeps you on the same page — `/en-US/projects/abc`
+ * becomes `/ar-AE/projects/abc`, not the home page. `usePathname` from our
+ * navigation module returns the path with the locale prefix stripped, so
+ * handing it back with a new locale is all that is needed.
  */
 export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
   const t = useTranslations("locale");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
-  const params = useParams();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -29,12 +27,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
     setOpen(false);
     if (next === locale) return;
     startTransition(() => {
-      router.replace(
-        // @ts-expect-error — params are typed per-route; they are valid for the
-        // route we are already on, which is the only one we navigate to.
-        { pathname, params },
-        { locale: next },
-      );
+      router.replace(pathname, { locale: next });
       // Persist for the next anonymous visit; authenticated users' stored
       // preference is updated by the settings form instead.
       document.cookie = `LINGOSAAS_LOCALE=${next};path=/;max-age=31536000;samesite=lax`;

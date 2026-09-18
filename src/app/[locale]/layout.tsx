@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { APP_URL } from "@/lib/i18n/metadata";
 import { getLocaleConfig, type Locale } from "@/lib/i18n/config";
 import { ThemeScript } from "@/components/layout/theme-script";
 import "../globals.css";
@@ -32,26 +33,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata.home" });
-  const base = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
+  // Site-wide defaults only. Canonical and hreflang are set PER PAGE (see
+  // lib/i18n/metadata.ts) because Next merges metadata down the tree, and a
+  // canonical declared here would point every child page at the locale root.
   return {
-    metadataBase: new URL(base),
+    metadataBase: new URL(APP_URL),
     title: { default: t("title"), template: "%s" },
     description: t("description"),
-    alternates: {
-      canonical: `/${locale}`,
-      // Every locale advertises its siblings, so search engines index all three.
-      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
-    },
-    openGraph: {
-      type: "website",
-      locale,
-      url: `/${locale}`,
-      siteName: "LingoSaaS",
-      title: t("title"),
-      description: t("description"),
-    },
-    twitter: { card: "summary_large_image", title: t("title"), description: t("description") },
   };
 }
 

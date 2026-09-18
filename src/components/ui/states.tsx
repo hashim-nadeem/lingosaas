@@ -3,13 +3,15 @@ import { Button } from "./button";
 
 /** PRD §40: empty states are designed, never an absent list. */
 export function EmptyState({
-  icon: Icon,
+  icon,
   title,
   description,
   action,
   className,
 }: {
-  icon?: React.ComponentType<{ className?: string }>;
+  /** A rendered element, not a component — see AnimatedMetricCard. Keeping one
+      rule for every icon prop removes a whole class of RSC boundary errors. */
+  icon?: React.ReactNode;
   title: string;
   description?: string;
   action?: React.ReactNode;
@@ -23,9 +25,9 @@ export function EmptyState({
         className,
       )}
     >
-      {Icon && (
-        <div className="flex size-11 items-center justify-center rounded-full bg-surface text-foreground-subtle shadow-xs">
-          <Icon className="size-5" />
+      {icon && (
+        <div className="flex size-11 items-center justify-center rounded-full bg-surface text-foreground-subtle shadow-xs [&>svg]:size-5">
+          {icon}
         </div>
       )}
       <div className="flex flex-col gap-1">

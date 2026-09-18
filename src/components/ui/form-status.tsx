@@ -10,8 +10,17 @@ import { Button, type ButtonProps } from "./button";
  * Submit button wired to the parent form's pending state. Disabled while
  * submitting, so a double-click cannot create two accounts.
  */
-export function SubmitButton({ children, pendingLabel, ...props }: ButtonProps & { pendingLabel?: string }) {
-  const { pending } = useFormStatus();
+export function SubmitButton({
+  children,
+  pendingLabel,
+  pending: pendingOverride,
+  ...props
+}: ButtonProps & { pendingLabel?: string; pending?: boolean }) {
+  // useFormStatus only sees a form it is rendered inside. When the button is
+  // detached via the `form` attribute (dialog footers), the caller passes
+  // `pending` from useActionState instead.
+  const status = useFormStatus();
+  const pending = pendingOverride ?? status.pending;
   const t = useTranslations("common");
 
   return (

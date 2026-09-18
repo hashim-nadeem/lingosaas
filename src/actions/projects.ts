@@ -1,10 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db/client";
 import { requirePermission } from "@/lib/db/context";
 import { assertProjectInWorkspace } from "@/lib/db/projects";
-import { locales } from "@/lib/i18n/config";
+import { defaultLocale, isLocale, locales } from "@/lib/i18n/config";
 import { projectFromFormData, type ProjectInput } from "@/lib/validations/project";
 import type { ActionState } from "./auth";
 
@@ -44,7 +45,7 @@ export async function createProjectAction(
 
   revalidatePath("/[locale]/projects", "page");
   revalidatePath("/[locale]/dashboard", "page");
-  return {};
+  redirect(`/${localeFrom(formData)}/projects`);
 }
 
 export async function updateProjectAction(
@@ -81,7 +82,7 @@ export async function updateProjectAction(
   revalidatePath("/[locale]/projects", "page");
   revalidatePath(`/[locale]/projects/${id}`, "page");
   revalidatePath("/[locale]/dashboard", "page");
-  return {};
+  redirect(`/${localeFrom(formData)}/projects/${id}`);
 }
 
 export async function deleteProjectAction(
@@ -102,7 +103,13 @@ export async function deleteProjectAction(
 
   revalidatePath("/[locale]/projects", "page");
   revalidatePath("/[locale]/dashboard", "page");
-  return {};
+  redirect(`/${localeFrom(formData)}/projects`);
+}
+
+/** The locale is a hidden form field; never trust it without validating. */
+function localeFrom(formData: FormData) {
+  const value = formData.get("locale");
+  return isLocale(value) ? value : defaultLocale;
 }
 
 type TranslationRow = { locale: string; name: string; description: string | null };

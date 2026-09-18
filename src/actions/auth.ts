@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import { unstable_rethrow } from "next/navigation";
 import { AuthError } from "next-auth";
-import { signIn } from "@/lib/auth";
+import { signIn, signOut } from "@/lib/auth";
 import { prisma } from "@/lib/db/client";
 import { defaultLocale, isLocale, localeConfigs } from "@/lib/i18n/config";
 import { loginSchema, registerSchema } from "@/lib/validations/auth";
@@ -143,4 +143,13 @@ function defaultWorkspaceName(name: string, locale: string) {
   if (locale === "es-MX") return `Espacio de ${first}`;
   if (locale === "ar-AE") return `مساحة ${first}`;
   return `${first}'s Workspace`;
+}
+
+/**
+ * Sign-out as a server action rather than a POST to the Auth.js endpoint —
+ * the action already carries Next's own CSRF protection, so there is no token
+ * to thread through the form.
+ */
+export async function signOutAction(): Promise<void> {
+  await signOut({ redirectTo: "/" });
 }
