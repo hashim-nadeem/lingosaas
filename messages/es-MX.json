@@ -1,0 +1,467 @@
+{
+  "common": {
+    "appName": "LingoSaaS",
+    "tagline": "Una plataforma. Todos los mercados.",
+    "loading": "Cargando…",
+    "save": "Guardar",
+    "saving": "Guardando…",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "search": "Buscar",
+    "retry": "Reintentar",
+    "learnMore": "Conocer más",
+    "getStarted": "Comenzar",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "signUp": "Crear cuenta"
+  },
+  "nav": {
+    "features": "Funciones",
+    "pricing": "Precios",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "dashboard": "Panel",
+    "projects": "Proyectos",
+    "team": "Equipo",
+    "notifications": "Notificaciones",
+    "settings": "Configuración",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "locale": {
+    "switchLanguage": "Cambiar idioma",
+    "currentLanguage": "Idioma actual: {language}",
+    "region": "Región",
+    "currency": "Moneda",
+    "timezone": "Zona horaria",
+    "direction": "Dirección del texto",
+    "ltr": "De izquierda a derecha",
+    "rtl": "De derecha a izquierda"
+  },
+  "marketing": {
+    "hero": {
+      "eyebrow": "Multilingüe · Multiempresa · Listo para producción",
+      "title": "Una plataforma. Todos los mercados.",
+      "subtitle": "Lanza un producto SaaS que se sienta local en inglés, español y árabe: el mismo código, monedas reales, formatos de fecha reales y diseños de derecha a izquierda de verdad.",
+      "primaryCta": "Empezar a construir",
+      "secondaryCta": "Ver el demo en vivo",
+      "trustedBy": "Construido sobre el stack con el que los equipos realmente lanzan"
+    },
+    "value": {
+      "title": "La localización no es un archivo de traducciones",
+      "subtitle": "El idioma es la parte fácil. LingoSaaS resuelve todo lo que hay debajo.",
+      "items": {
+        "routing": {
+          "title": "Rutas con idioma integrado",
+          "description": "Cada ruta lleva prefijo y es indexable. Al cambiar de idioma te quedas justo donde estabas."
+        },
+        "formatting": {
+          "title": "Formatos regionales",
+          "description": "Moneda, fechas, números y tiempo relativo salen de Intl, nunca de textos fijos en el código."
+        },
+        "rtl": {
+          "title": "RTL de verdad, no CSS espejeado",
+          "description": "El árabe es un modo de diseño completo. Propiedades lógicas en todo y manejo intencional de los iconos direccionales."
+        },
+        "content": {
+          "title": "Contenido traducido en la base de datos",
+          "description": "El contenido que generan los usuarios se traduce por idioma con una cadena de respaldo consistente."
+        },
+        "tenancy": {
+          "title": "Multiempresa desde el inicio",
+          "description": "El aislamiento entre espacios de trabajo se aplica en la capa de datos, no se esconde en la interfaz."
+        },
+        "permissions": {
+          "title": "Roles que sí significan algo",
+          "description": "Los permisos de propietario, administrador y miembro se resuelven en el servidor en cada solicitud."
+        }
+      }
+    },
+    "preview": {
+      "title": "Mira cómo el producto cambia de mercado",
+      "subtitle": "El mismo panel. Tres mercados. Elige uno.",
+      "sampleRevenue": "Ingresos de este mes",
+      "sampleProjects": "Proyectos activos",
+      "sampleMembers": "Miembros del equipo",
+      "sampleUpdated": "Última actualización: {date}",
+      "note": "Aquí nada es una captura de pantalla: la vista previa se vuelve a generar con el idioma que elijas."
+    },
+    "features": {
+      "title": "Todo lo que un SaaS real necesita",
+      "subtitle": "Con criterio donde importa y ampliable en todo lo demás."
+    },
+    "dashboardPreview": {
+      "title": "Un panel digno de lanzar",
+      "subtitle": "Estados diseñados, no los que trae el navegador: carga, vacío, error y acceso denegado incluidos."
+    },
+    "testimonials": {
+      "title": "Hecho para equipos que se vuelven globales",
+      "subtitle": "Los problemas que esto resuelve, en palabras de quienes los vivieron."
+    },
+    "pricing": {
+      "title": "Precios claros",
+      "subtitle": "Empieza gratis. Mejora tu plan cuando llegue tu segundo mercado.",
+      "perMonth": "/mes",
+      "mostPopular": "El más popular",
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "description": "Un espacio de trabajo, un mercado.",
+          "cta": "Empezar gratis"
+        },
+        "growth": {
+          "name": "Growth",
+          "description": "Idiomas y espacios de trabajo ilimitados.",
+          "cta": "Elegir Growth"
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "description": "Idiomas a la medida, SSO y soporte.",
+          "cta": "Hablar con nosotros"
+        }
+      },
+      "features": {
+        "workspaces": "{count, plural, =1 {# espacio de trabajo} other {# espacios de trabajo}}",
+        "projects": "{count, plural, =0 {Proyectos ilimitados} other {Hasta # proyectos}}",
+        "locales": "{count, plural, =1 {# idioma} other {# idiomas}}",
+        "members": "{count, plural, =1 {# miembro del equipo} other {# miembros del equipo}}",
+        "support": "Soporte prioritario",
+        "rtl": "Soporte RTL completo"
+      }
+    },
+    "faq": {
+      "title": "Preguntas, resueltas",
+      "items": {
+        "addLocale": {
+          "question": "¿Cómo agrego un idioma nuevo?",
+          "answer": "Agrégalo a la configuración de idiomas, coloca un archivo de mensajes y añade las traducciones del contenido existente. Las rutas, los formatos y la dirección se ajustan solos."
+        },
+        "rtl": {
+          "question": "¿El árabe está realmente soportado o solo traducido?",
+          "answer": "La dirección se define en el documento, los espaciados usan propiedades lógicas y los iconos direccionales se voltean de forma intencional, mientras que los logotipos no."
+        },
+        "tenancy": {
+          "question": "¿Cómo se aíslan los datos de cada cliente?",
+          "answer": "Cada consulta pasa por una capa de acceso a datos que resuelve el espacio de trabajo activo desde la sesión y verifica la membresía. Nunca se confía en los IDs de espacio de trabajo que envía el cliente."
+        },
+        "deploy": {
+          "question": "¿Dónde se despliega?",
+          "answer": "En Vercel, con cualquier proveedor de PostgreSQL administrado. Docker es solo para desarrollo local."
+        }
+      }
+    },
+    "cta": {
+      "title": "Construye global. Vive local.",
+      "subtitle": "Clónalo, ponle tu nombre y lánzalo.",
+      "button": "Comenzar"
+    },
+    "footer": {
+      "product": "Producto",
+      "company": "Empresa",
+      "resources": "Recursos",
+      "legal": "Legal",
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "rights": "© {year} LingoSaaS. Todos los derechos reservados."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Qué bueno verte de nuevo",
+      "subtitle": "Inicia sesión en tu espacio de trabajo.",
+      "submit": "Iniciar sesión",
+      "noAccount": "¿No tienes cuenta?",
+      "createOne": "Crea una",
+      "forgot": "¿Olvidaste tu contraseña?",
+      "invalidCredentials": "Esa combinación de correo y contraseña no coincide con ninguna cuenta."
+    },
+    "register": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Tu primer espacio de trabajo se crea junto contigo.",
+      "submit": "Crear cuenta",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "signIn": "Iniciar sesión",
+      "emailTaken": "Ya existe una cuenta con este correo."
+    },
+    "forgotPassword": {
+      "title": "Restablece tu contraseña",
+      "subtitle": "Te enviaremos un enlace por correo.",
+      "submit": "Enviar enlace",
+      "sent": "Si existe una cuenta con ese correo, el enlace para restablecerla ya va en camino."
+    },
+    "resetPassword": {
+      "title": "Elige una contraseña nueva",
+      "submit": "Actualizar contraseña",
+      "invalidToken": "Este enlace no es válido o ya expiró.",
+      "success": "Tu contraseña se actualizó."
+    },
+    "fields": {
+      "name": "Nombre completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña"
+    },
+    "demo": {
+      "label": "Cuenta de demostración",
+      "hint": "Usa {email} con la contraseña {password}."
+    }
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "email": "Escribe un correo electrónico válido.",
+    "minLength": "Este valor es demasiado corto.",
+    "maxLength": "Este valor es demasiado largo.",
+    "passwordMismatch": "Las contraseñas no coinciden.",
+    "passwordWeak": "Usa al menos 8 caracteres, incluyendo una letra y un número.",
+    "invalidLocale": "Ese idioma no está disponible.",
+    "invalidTimezone": "Esa zona horaria no se reconoce."
+  },
+  "dashboard": {
+    "greeting": "Qué bueno verte, {name}",
+    "subtitle": "Esto es lo que está pasando en {workspace}.",
+    "metrics": {
+      "totalProjects": "Proyectos totales",
+      "activeProjects": "Proyectos activos",
+      "completedProjects": "Completados",
+      "teamMembers": "Miembros del equipo"
+    },
+    "recentProjects": "Proyectos recientes",
+    "teamOverview": "Equipo",
+    "recentNotifications": "Actividad reciente",
+    "quickActions": "Acciones rápidas",
+    "viewAll": "Ver todo",
+    "localeShowcase": {
+      "title": "Tu formato regional",
+      "subtitle": "Mostrado para {region} en {currency}.",
+      "amount": "Monto de ejemplo",
+      "date": "Fecha de ejemplo",
+      "number": "Número de ejemplo",
+      "relative": "Tiempo relativo"
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Todo en lo que trabaja tu espacio de trabajo.",
+    "create": "Nuevo proyecto",
+    "createTitle": "Crear un proyecto",
+    "editTitle": "Editar proyecto",
+    "deleteTitle": "Eliminar proyecto",
+    "deleteConfirm": "¿Eliminar \"{name}\"? Esta acción no se puede deshacer.",
+    "fields": {
+      "name": "Nombre del proyecto",
+      "description": "Descripción",
+      "status": "Estado",
+      "translations": "Traducciones",
+      "createdAt": "Creado",
+      "createdBy": "Creado por"
+    },
+    "status": {
+      "PLANNING": "En planeación",
+      "IN_PROGRESS": "En curso",
+      "COMPLETED": "Completado",
+      "ARCHIVED": "Archivado"
+    },
+    "filter": {
+      "all": "Todos",
+      "label": "Filtrar por estado"
+    },
+    "translationHint": "Escribe el nombre y la descripción para cada idioma. El inglés es obligatorio y se usa como respaldo.",
+    "fallbackNotice": "Aún no se traduce al {language}: se muestra en {fallbackLanguage}.",
+    "untranslated": "Traducción no disponible",
+    "empty": {
+      "title": "Todavía no hay proyectos",
+      "description": "Crea tu primer proyecto para verlo aquí.",
+      "action": "Nuevo proyecto"
+    },
+    "emptyFiltered": {
+      "title": "No hay proyectos que coincidan",
+      "description": "Ningún proyecto tiene ese estado por ahora."
+    },
+    "created": "Proyecto creado.",
+    "updated": "Proyecto actualizado.",
+    "deleted": "Proyecto eliminado."
+  },
+  "team": {
+    "title": "Equipo",
+    "subtitle": "Quién tiene acceso a {workspace}.",
+    "invite": "Invitar miembro",
+    "inviteTitle": "Invita a alguien",
+    "inviteSubtitle": "Recibirá un enlace para unirse a este espacio de trabajo.",
+    "fields": {
+      "email": "Correo electrónico",
+      "role": "Rol",
+      "member": "Miembro",
+      "joined": "Se unió"
+    },
+    "roles": {
+      "OWNER": "Propietario",
+      "ADMIN": "Administrador",
+      "MEMBER": "Miembro"
+    },
+    "roleDescriptions": {
+      "OWNER": "Control total, incluso para eliminar el espacio de trabajo.",
+      "ADMIN": "Administra proyectos y miembros.",
+      "MEMBER": "Crea y edita proyectos."
+    },
+    "pendingInvites": "Invitaciones pendientes",
+    "expires": "Expira el {date}",
+    "resend": "Reenviar",
+    "revoke": "Revocar",
+    "remove": "Quitar",
+    "removeConfirm": "¿Quitar a {name} de este espacio de trabajo?",
+    "changeRole": "Cambiar rol",
+    "invited": "Invitación enviada.",
+    "removed": "Miembro eliminado.",
+    "roleChanged": "Rol actualizado.",
+    "empty": {
+      "title": "Por ahora solo estás tú",
+      "description": "Invita a tus compañeros para colaborar en los proyectos.",
+      "action": "Invitar miembro"
+    }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "markAllRead": "Marcar todo como leído",
+    "unreadCount": "{count, plural, =0 {Nada sin leer} =1 {# sin leer} other {# sin leer}}",
+    "empty": {
+      "title": "Estás al día",
+      "description": "La actividad de tu espacio de trabajo aparecerá aquí."
+    },
+    "messages": {
+      "WELCOME": "Te damos la bienvenida a LingoSaaS, {name}. Tu espacio de trabajo está listo.",
+      "PROJECT_CREATED": "{actor} creó el proyecto {project}.",
+      "PROJECT_UPDATED": "{actor} actualizó {project}.",
+      "MEMBER_INVITED": "{actor} invitó a {email} al espacio de trabajo.",
+      "MEMBER_JOINED": "{name} se unió al espacio de trabajo.",
+      "WORKSPACE_UPDATED": "{actor} actualizó la configuración del espacio de trabajo."
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "tabs": {
+      "profile": "Perfil",
+      "preferences": "Preferencias",
+      "workspace": "Espacio de trabajo"
+    },
+    "profile": {
+      "title": "Perfil",
+      "subtitle": "Así te ve tu equipo.",
+      "saved": "Perfil actualizado."
+    },
+    "preferences": {
+      "title": "Preferencias",
+      "subtitle": "Idioma, región y apariencia.",
+      "language": "Idioma",
+      "languageHint": "Se aplica en todas las sesiones donde hayas iniciado sesión.",
+      "timezone": "Zona horaria",
+      "timezoneHint": "Las fechas y horas se muestran en esta zona.",
+      "theme": "Tema",
+      "themes": {
+        "LIGHT": "Claro",
+        "DARK": "Oscuro",
+        "SYSTEM": "Sistema"
+      },
+      "notifications": "Notificaciones",
+      "notifyInApp": "Notificaciones en la app",
+      "notifyEmail": "Notificaciones por correo",
+      "saved": "Preferencias actualizadas."
+    },
+    "workspace": {
+      "title": "Espacio de trabajo",
+      "subtitle": "Nombre, descripción y zona de riesgo.",
+      "name": "Nombre del espacio de trabajo",
+      "slug": "Slug de la URL",
+      "description": "Descripción",
+      "dangerZone": "Zona de riesgo",
+      "deleteWorkspace": "Eliminar espacio de trabajo",
+      "deleteHint": "Elimina todos los proyectos, invitaciones y membresías. Esta acción no se puede deshacer.",
+      "deleteConfirmLabel": "Escribe {slug} para confirmar",
+      "saved": "Espacio de trabajo actualizado."
+    }
+  },
+  "workspace": {
+    "switch": "Cambiar de espacio de trabajo",
+    "current": "Espacio de trabajo actual",
+    "create": "Nuevo espacio de trabajo",
+    "createTitle": "Crear un espacio de trabajo",
+    "created": "Espacio de trabajo creado.",
+    "noAccess": "No tienes acceso a ese espacio de trabajo."
+  },
+  "errors": {
+    "generic": {
+      "title": "Algo salió mal",
+      "description": "El error quedó registrado. Vuelve a intentarlo en un momento.",
+      "action": "Reintentar"
+    },
+    "notFound": {
+      "title": "Página no encontrada",
+      "description": "La página que buscas no existe o cambió de lugar.",
+      "action": "Volver al panel"
+    },
+    "forbidden": {
+      "title": "No tienes acceso",
+      "description": "Tu rol en este espacio de trabajo no lo permite.",
+      "action": "Volver al panel"
+    },
+    "unauthorized": {
+      "title": "Inicia sesión",
+      "description": "Tu sesión expiró.",
+      "action": "Iniciar sesión"
+    },
+    "database": {
+      "title": "No podemos conectarnos a la base de datos",
+      "description": "El problema es de nuestro lado. Vuelve a intentarlo en un momento."
+    },
+    "invalidLocale": {
+      "title": "Idioma no disponible",
+      "description": "Ese idioma todavía no está disponible."
+    },
+    "expiredInvitation": {
+      "title": "La invitación expiró",
+      "description": "Pídele a un administrador del espacio de trabajo que te envíe una nueva."
+    },
+    "formFailed": "No pudimos guardar tus cambios. Revisa los campos y vuelve a intentarlo."
+  },
+  "a11y": {
+    "skipToContent": "Ir al contenido",
+    "toggleTheme": "Cambiar tema",
+    "toggleSidebar": "Mostrar u ocultar la barra lateral",
+    "notificationsBadge": "{count} notificaciones sin leer"
+  },
+  "metadata": {
+    "home": {
+      "title": "LingoSaaS — Una plataforma. Todos los mercados.",
+      "description": "Un starter SaaS multilingüe y multiempresa con soporte RTL real, formatos regionales y contenido traducido en la base de datos."
+    },
+    "pricing": {
+      "title": "Precios — LingoSaaS",
+      "description": "Planes claros que crecen con la cantidad de mercados que atiendes."
+    },
+    "about": {
+      "title": "Nosotros — LingoSaaS",
+      "description": "Por qué la internacionalización merece ser una decisión de arquitectura."
+    },
+    "contact": {
+      "title": "Contacto — LingoSaaS",
+      "description": "Ponte en contacto con nosotros sobre LingoSaaS."
+    },
+    "login": {
+      "title": "Iniciar sesión — LingoSaaS",
+      "description": "Inicia sesión en tu espacio de trabajo de LingoSaaS."
+    },
+    "register": {
+      "title": "Crear una cuenta — LingoSaaS",
+      "description": "Crea tu espacio de trabajo de LingoSaaS."
+    },
+    "dashboard": {
+      "title": "Panel — LingoSaaS",
+      "description": "Tu espacio de trabajo de un vistazo."
+    }
+  }
+}

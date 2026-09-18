@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-lingosaas}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-lingosaas}
+      POSTGRES_DB: ${POSTGRES_DB:-lingosaas}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-lingosaas}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Inside the compose network postgres resolves by service name, not localhost.
+      DATABASE_URL: postgresql://${POSTGRES_USER:-lingosaas}:${POSTGRES_PASSWORD:-lingosaas}@postgres:5432/${POSTGRES_DB:-lingosaas}?schema=public
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      # Keep container-built node_modules (native binaries differ from the host).
+      - node_modules:/app/node_modules
+      - next_cache:/app/.next
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  node_modules:
+  next_cache:

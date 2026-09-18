@@ -1,0 +1,467 @@
+{
+  "common": {
+    "appName": "LingoSaaS",
+    "tagline": "One Platform. Every Market.",
+    "loading": "Loading…",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "retry": "Try again",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signUp": "Sign up"
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "team": "Team",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "locale": {
+    "switchLanguage": "Change language",
+    "currentLanguage": "Current language: {language}",
+    "region": "Region",
+    "currency": "Currency",
+    "timezone": "Time zone",
+    "direction": "Text direction",
+    "ltr": "Left to right",
+    "rtl": "Right to left"
+  },
+  "marketing": {
+    "hero": {
+      "eyebrow": "Multilingual · Multi-tenant · Production-ready",
+      "title": "One platform. Every market.",
+      "subtitle": "Ship a SaaS product that feels native in English, Spanish and Arabic — same codebase, real currencies, real date formats, real right-to-left layouts.",
+      "primaryCta": "Start building",
+      "secondaryCta": "See the live demo",
+      "trustedBy": "Built on the stack teams actually ship with"
+    },
+    "value": {
+      "title": "Localization is not a translation file",
+      "subtitle": "Language is the easy part. LingoSaaS handles everything underneath it.",
+      "items": {
+        "routing": {
+          "title": "Locale-aware routing",
+          "description": "Every route is prefixed and indexable. Switching language keeps you exactly where you were."
+        },
+        "formatting": {
+          "title": "Regional formatting",
+          "description": "Currency, dates, numbers and relative time come from Intl, never from hardcoded strings."
+        },
+        "rtl": {
+          "title": "Real RTL, not mirrored CSS",
+          "description": "Arabic is a full layout mode. Logical properties throughout, directional icons handled deliberately."
+        },
+        "content": {
+          "title": "Translated database content",
+          "description": "User-generated content is translated per locale with a consistent fallback chain."
+        },
+        "tenancy": {
+          "title": "Multi-tenant by default",
+          "description": "Workspace isolation is enforced in the data layer, not hidden in the UI."
+        },
+        "permissions": {
+          "title": "Roles that mean something",
+          "description": "Owner, admin and member permissions resolved server-side on every request."
+        }
+      }
+    },
+    "preview": {
+      "title": "Watch the product change markets",
+      "subtitle": "Same dashboard. Three markets. Pick one.",
+      "sampleRevenue": "Revenue this month",
+      "sampleProjects": "Active projects",
+      "sampleMembers": "Team members",
+      "sampleUpdated": "Last updated {date}",
+      "note": "Nothing here is a screenshot — the preview re-renders with the locale you choose."
+    },
+    "features": {
+      "title": "Everything a real SaaS needs",
+      "subtitle": "Opinionated where it matters, extensible everywhere else."
+    },
+    "dashboardPreview": {
+      "title": "A dashboard worth shipping",
+      "subtitle": "Designed states, not browser defaults — loading, empty, error and permission-denied all included."
+    },
+    "testimonials": {
+      "title": "Built for teams going global",
+      "subtitle": "The problems this solves, in the words of the people who hit them."
+    },
+    "pricing": {
+      "title": "Simple pricing",
+      "subtitle": "Start free. Upgrade when your second market shows up.",
+      "perMonth": "/month",
+      "mostPopular": "Most popular",
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "description": "One workspace, one market.",
+          "cta": "Start free"
+        },
+        "growth": {
+          "name": "Growth",
+          "description": "Unlimited locales and workspaces.",
+          "cta": "Choose Growth"
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "description": "Custom locales, SSO and support.",
+          "cta": "Talk to us"
+        }
+      },
+      "features": {
+        "workspaces": "{count, plural, =1 {# workspace} other {# workspaces}}",
+        "projects": "{count, plural, =0 {Unlimited projects} other {Up to # projects}}",
+        "locales": "{count, plural, =1 {# locale} other {# locales}}",
+        "members": "{count, plural, =1 {# team member} other {# team members}}",
+        "support": "Priority support",
+        "rtl": "Full RTL support"
+      }
+    },
+    "faq": {
+      "title": "Questions, answered",
+      "items": {
+        "addLocale": {
+          "question": "How do I add a new locale?",
+          "answer": "Add it to the locale config, drop in a message file, and add translations for existing content. Routes, formatting and direction follow automatically."
+        },
+        "rtl": {
+          "question": "Is Arabic really supported, or just translated?",
+          "answer": "Direction is set on the document, spacing uses logical properties, and directional icons flip deliberately while brand marks do not."
+        },
+        "tenancy": {
+          "question": "How is tenant data isolated?",
+          "answer": "Every query goes through a data-access layer that resolves the active workspace from the session and verifies membership. Client-supplied workspace IDs are never trusted."
+        },
+        "deploy": {
+          "question": "Where does it deploy?",
+          "answer": "Vercel, with any managed PostgreSQL provider. Docker is for local development only."
+        }
+      }
+    },
+    "cta": {
+      "title": "Build globally. Experience locally.",
+      "subtitle": "Clone it, rename it, ship it.",
+      "button": "Get started"
+    },
+    "footer": {
+      "product": "Product",
+      "company": "Company",
+      "resources": "Resources",
+      "legal": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "rights": "© {year} LingoSaaS. All rights reserved."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your workspace.",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "createOne": "Create one",
+      "forgot": "Forgot your password?",
+      "invalidCredentials": "That email and password combination doesn't match an account."
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Your first workspace is created with you.",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "emailTaken": "An account already exists for this email."
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "We'll email you a reset link.",
+      "submit": "Send reset link",
+      "sent": "If an account exists for that email, a reset link is on its way."
+    },
+    "resetPassword": {
+      "title": "Choose a new password",
+      "submit": "Update password",
+      "invalidToken": "This reset link is invalid or has expired.",
+      "success": "Your password has been updated."
+    },
+    "fields": {
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+    "demo": {
+      "label": "Demo account",
+      "hint": "Use {email} with password {password}."
+    }
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Enter a valid email address.",
+    "minLength": "This value is too short.",
+    "maxLength": "This value is too long.",
+    "passwordMismatch": "Passwords don't match.",
+    "passwordWeak": "Use at least 8 characters, including a letter and a number.",
+    "invalidLocale": "That language isn't supported.",
+    "invalidTimezone": "That time zone isn't recognized."
+  },
+  "dashboard": {
+    "greeting": "Welcome back, {name}",
+    "subtitle": "Here's what's happening in {workspace}.",
+    "metrics": {
+      "totalProjects": "Total projects",
+      "activeProjects": "Active projects",
+      "completedProjects": "Completed",
+      "teamMembers": "Team members"
+    },
+    "recentProjects": "Recent projects",
+    "teamOverview": "Team",
+    "recentNotifications": "Recent activity",
+    "quickActions": "Quick actions",
+    "viewAll": "View all",
+    "localeShowcase": {
+      "title": "Your regional format",
+      "subtitle": "Rendered for {region} in {currency}.",
+      "amount": "Sample amount",
+      "date": "Sample date",
+      "number": "Sample number",
+      "relative": "Relative time"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Everything your workspace is working on.",
+    "create": "New project",
+    "createTitle": "Create a project",
+    "editTitle": "Edit project",
+    "deleteTitle": "Delete project",
+    "deleteConfirm": "Delete \"{name}\"? This can't be undone.",
+    "fields": {
+      "name": "Project name",
+      "description": "Description",
+      "status": "Status",
+      "translations": "Translations",
+      "createdAt": "Created",
+      "createdBy": "Created by"
+    },
+    "status": {
+      "PLANNING": "Planning",
+      "IN_PROGRESS": "In progress",
+      "COMPLETED": "Completed",
+      "ARCHIVED": "Archived"
+    },
+    "filter": {
+      "all": "All",
+      "label": "Filter by status"
+    },
+    "translationHint": "Provide the name and description for each language. English is required and used as the fallback.",
+    "fallbackNotice": "Not yet translated into {language} — showing {fallbackLanguage}.",
+    "untranslated": "Translation unavailable",
+    "empty": {
+      "title": "No projects yet",
+      "description": "Create your first project to see it here.",
+      "action": "New project"
+    },
+    "emptyFiltered": {
+      "title": "No matching projects",
+      "description": "No projects have that status right now."
+    },
+    "created": "Project created.",
+    "updated": "Project updated.",
+    "deleted": "Project deleted."
+  },
+  "team": {
+    "title": "Team",
+    "subtitle": "Who has access to {workspace}.",
+    "invite": "Invite member",
+    "inviteTitle": "Invite someone",
+    "inviteSubtitle": "They'll get a link to join this workspace.",
+    "fields": {
+      "email": "Email",
+      "role": "Role",
+      "member": "Member",
+      "joined": "Joined"
+    },
+    "roles": {
+      "OWNER": "Owner",
+      "ADMIN": "Admin",
+      "MEMBER": "Member"
+    },
+    "roleDescriptions": {
+      "OWNER": "Full control, including deleting the workspace.",
+      "ADMIN": "Manages projects and members.",
+      "MEMBER": "Creates and edits projects."
+    },
+    "pendingInvites": "Pending invitations",
+    "expires": "Expires {date}",
+    "resend": "Resend",
+    "revoke": "Revoke",
+    "remove": "Remove",
+    "removeConfirm": "Remove {name} from this workspace?",
+    "changeRole": "Change role",
+    "invited": "Invitation sent.",
+    "removed": "Member removed.",
+    "roleChanged": "Role updated.",
+    "empty": {
+      "title": "It's just you here",
+      "description": "Invite teammates to collaborate on projects.",
+      "action": "Invite member"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "unreadCount": "{count, plural, =0 {No unread} =1 {# unread} other {# unread}}",
+    "empty": {
+      "title": "You're all caught up",
+      "description": "Activity in your workspace will show up here."
+    },
+    "messages": {
+      "WELCOME": "Welcome to LingoSaaS, {name}. Your workspace is ready.",
+      "PROJECT_CREATED": "{actor} created the project {project}.",
+      "PROJECT_UPDATED": "{actor} updated {project}.",
+      "MEMBER_INVITED": "{actor} invited {email} to the workspace.",
+      "MEMBER_JOINED": "{name} joined the workspace.",
+      "WORKSPACE_UPDATED": "{actor} updated the workspace settings."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "profile": "Profile",
+      "preferences": "Preferences",
+      "workspace": "Workspace"
+    },
+    "profile": {
+      "title": "Profile",
+      "subtitle": "How you appear to your team.",
+      "saved": "Profile updated."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "subtitle": "Language, region and appearance.",
+      "language": "Language",
+      "languageHint": "Applies everywhere you're signed in.",
+      "timezone": "Time zone",
+      "timezoneHint": "Dates and times are shown in this zone.",
+      "theme": "Theme",
+      "themes": {
+        "LIGHT": "Light",
+        "DARK": "Dark",
+        "SYSTEM": "System"
+      },
+      "notifications": "Notifications",
+      "notifyInApp": "In-app notifications",
+      "notifyEmail": "Email notifications",
+      "saved": "Preferences updated."
+    },
+    "workspace": {
+      "title": "Workspace",
+      "subtitle": "Name, description and danger zone.",
+      "name": "Workspace name",
+      "slug": "URL slug",
+      "description": "Description",
+      "dangerZone": "Danger zone",
+      "deleteWorkspace": "Delete workspace",
+      "deleteHint": "Deletes every project, invitation and membership. This can't be undone.",
+      "deleteConfirmLabel": "Type {slug} to confirm",
+      "saved": "Workspace updated."
+    }
+  },
+  "workspace": {
+    "switch": "Switch workspace",
+    "current": "Current workspace",
+    "create": "New workspace",
+    "createTitle": "Create a workspace",
+    "created": "Workspace created.",
+    "noAccess": "You don't have access to that workspace."
+  },
+  "errors": {
+    "generic": {
+      "title": "Something went wrong",
+      "description": "The error has been logged. Try again in a moment.",
+      "action": "Try again"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has moved.",
+      "action": "Back to dashboard"
+    },
+    "forbidden": {
+      "title": "You don't have access",
+      "description": "Your role in this workspace doesn't allow that.",
+      "action": "Back to dashboard"
+    },
+    "unauthorized": {
+      "title": "Please sign in",
+      "description": "Your session has expired.",
+      "action": "Sign in"
+    },
+    "database": {
+      "title": "We can't reach the database",
+      "description": "This is on our side. Try again shortly."
+    },
+    "invalidLocale": {
+      "title": "Unsupported language",
+      "description": "That language isn't available yet."
+    },
+    "expiredInvitation": {
+      "title": "Invitation expired",
+      "description": "Ask a workspace admin to send a new one."
+    },
+    "formFailed": "Couldn't save your changes. Check the fields and try again."
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "toggleTheme": "Toggle theme",
+    "toggleSidebar": "Toggle sidebar",
+    "notificationsBadge": "{count} unread notifications"
+  },
+  "metadata": {
+    "home": {
+      "title": "LingoSaaS — One Platform. Every Market.",
+      "description": "A multilingual, multi-tenant SaaS starter with real RTL support, regional formatting and translated database content."
+    },
+    "pricing": {
+      "title": "Pricing — LingoSaaS",
+      "description": "Simple plans that scale with the number of markets you serve."
+    },
+    "about": {
+      "title": "About — LingoSaaS",
+      "description": "Why internationalization deserves to be an architectural decision."
+    },
+    "contact": {
+      "title": "Contact — LingoSaaS",
+      "description": "Get in touch about LingoSaaS."
+    },
+    "login": {
+      "title": "Sign in — LingoSaaS",
+      "description": "Sign in to your LingoSaaS workspace."
+    },
+    "register": {
+      "title": "Create an account — LingoSaaS",
+      "description": "Create your LingoSaaS workspace."
+    },
+    "dashboard": {
+      "title": "Dashboard — LingoSaaS",
+      "description": "Your workspace at a glance."
+    }
+  }
+}

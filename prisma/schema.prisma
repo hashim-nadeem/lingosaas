@@ -1,0 +1,171 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
+}
+
+enum NotificationType {
+  WELCOME
+  PROJECT_CREATED
+  PROJECT_UPDATED
+  MEMBER_INVITED
+  MEMBER_JOINED
+  WORKSPACE_UPDATED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  /// bcrypt hash; null for accounts created via an OAuth provider.
+  passwordHash String?
+  image        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  preference    UserPreference?
+  memberships   WorkspaceMember[]
+  ownedSpaces   Workspace[]       @relation("WorkspaceOwner")
+  createdProjects Project[]       @relation("ProjectCreator")
+  notifications Notification[]
+  sentInvites   Invitation[]      @relation("InvitationSender")
+}
+
+model UserPreference {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  locale    String   @default("en-US")
+  timezone  String   @default("America/New_York")
+  theme     Theme    @default(SYSTEM)
+  /// Per-type opt-outs; absent key means enabled.
+  notifyInApp Boolean @default(true)
+  notifyEmail Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Workspace {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  ownerId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  owner         User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members       WorkspaceMember[]
+  projects      Project[]
+  invitations   Invitation[]
+  notifications Notification[]
+
+  @@index([ownerId])
+}
+
+model WorkspaceMember {
+  id          String   @id @default(cuid())
+  workspaceId String
+  userId      String
+  role        Role     @default(MEMBER)
+  createdAt   DateTime @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// A user holds exactly one role per workspace — this is the isolation lookup key.
+  @@unique([workspaceId, userId])
+  @@index([userId])
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  workspaceId String
+  status      ProjectStatus @default(PLANNING)
+  createdById String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  workspace    Workspace            @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdBy    User?                @relation("ProjectCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  translations ProjectTranslation[]
+
+  /// Dashboard counts and the filtered project list both hit this.
+  @@index([workspaceId, status])
+  @@index([workspaceId, createdAt])
+}
+
+model ProjectTranslation {
+  id          String  @id @default(cuid())
+  projectId   String
+  locale      String
+  name        String
+  description String?
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  /// PRD §23: a project must not carry two translations for one locale.
+  @@unique([projectId, locale])
+}
+
+model Invitation {
+  id          String    @id @default(cuid())
+  workspaceId String
+  email       String
+  role        Role      @default(MEMBER)
+  token       String    @unique
+  invitedById String?
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  createdAt   DateTime  @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  invitedBy User?     @relation("InvitationSender", fields: [invitedById], references: [id], onDelete: SetNull)
+
+  /// One live invite per email per workspace.
+  @@unique([workspaceId, email])
+  @@index([email])
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  userId      String
+  workspaceId String?
+  type        NotificationType
+  /// next-intl message key under `notifications.<key>`; rendered per-viewer,
+  /// so a notification reads correctly whatever locale the reader picks later.
+  messageKey  String
+  /// Interpolation values for that message (project name, inviter name, ...).
+  params      Json             @default("{}")
+  readAt      DateTime?
+  createdAt   DateTime         @default(now())
+
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  /// The bell badge query: unread, newest first, for this user in this workspace.
+  @@index([userId, workspaceId, readAt])
+  @@index([userId, createdAt])
+}
