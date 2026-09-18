@@ -26,3 +26,12 @@ export default function Loading() {
     </div>
   );
 }
+
+/*
+ * This lives in a `(index)` route group, not directly under `projects/`.
+ *
+ * A loading.tsx at the segment root wraps every nested route in a Suspense
+ * boundary, which flushes the shell — and its 200 status — before
+ * `/projects/[projectId]` can call notFound(). The group scopes the skeleton
+ * to the list page so the detail route can still answer a real 404.
+ */

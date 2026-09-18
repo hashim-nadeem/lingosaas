@@ -30,17 +30,18 @@ export function AnimatedMetricCard({
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const reduced = useReducedMotion();
   const format = useFormatter();
-  const [display, setDisplay] = useState(reduced ? value : 0);
+  const [animated, setAnimated] = useState(0);
+
+  // Derived, not synced: under reduced motion the final value is simply what
+  // renders, so the effect never has to push state on mount.
+  const display = reduced ? value : animated;
 
   useEffect(() => {
-    if (!inView || reduced) {
-      setDisplay(value);
-      return;
-    }
+    if (!inView || reduced) return;
     const controls = animate(0, value, {
       duration: Math.min(0.4 + value * 0.02, 1.2),
       ease: [0.22, 1, 0.36, 1],
-      onUpdate: (latest) => setDisplay(Math.round(latest)),
+      onUpdate: (latest) => setAnimated(Math.round(latest)),
     });
     return () => controls.stop();
   }, [inView, reduced, value]);

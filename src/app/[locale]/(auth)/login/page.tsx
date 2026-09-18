@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { privateMetadata } from "@/lib/i18n/metadata";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
+import { getSessionUser } from "@/lib/db/context";
 import { LoginForm } from "@/components/auth/auth-forms";
 import { Card } from "@/components/ui/card";
 import { FadeIn } from "@/components/motion/primitives";
@@ -18,6 +19,10 @@ export async function generateMetadata({
 export default async function LoginPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+
+  // Already signed in? The sign-in form is a dead end; go to the app.
+  if (await getSessionUser()) redirect({ href: "/dashboard", locale });
+
   const t = await getTranslations("auth");
 
   return (

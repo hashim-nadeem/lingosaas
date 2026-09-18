@@ -28,17 +28,29 @@ export const projectSchema = z.object({
 
 export type ProjectInput = z.infer<typeof projectSchema>;
 
-/** Parses the flat `translations.<locale>.<field>` FormData shape. */
+/**
+ * Parses the flat `translations.<locale>.<field>` FormData shape.
+ *
+ * The form keeps every locale's inputs mounted, so it always submits all three
+ * — including empty strings for the tabs the user left alone. Those must become
+ * `undefined`, or an untouched Spanish tab would fail `min(1)` and reject an
+ * otherwise valid submission.
+ */
 export function projectFromFormData(formData: FormData) {
-  const translations: Record<string, { name?: string; description?: string }> = {};
+  const read = (key: string) => {
+    const value = formData.get(key);
+    if (typeof value !== "string") return undefined;
+    const trimmed = value.trim();
+    return trimmed === "" ? undefined : trimmed;
+  };
+
+  const translations: Record<string, { name?: string; description?: string } | undefined> = {};
 
   for (const locale of locales) {
-    const name = formData.get(`translations.${locale}.name`);
-    const description = formData.get(`translations.${locale}.description`);
-    translations[locale] = {
-      name: typeof name === "string" ? name : undefined,
-      description: typeof description === "string" ? description : undefined,
-    };
+    const name = read(`translations.${locale}.name`);
+    const description = read(`translations.${locale}.description`);
+    // An entirely blank locale is absent, not an empty row.
+    translations[locale] = name === undefined && description === undefined ? undefined : { name, description };
   }
 
   return projectSchema.safeParse({

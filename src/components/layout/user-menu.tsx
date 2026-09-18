@@ -29,7 +29,7 @@ export function UserMenu({
     const dark =
       next === "DARK" ||
       (next === "SYSTEM" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.dataset.theme = dark ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
     // Mirrors the pre-paint script in ThemeScript; the database copy is the
     // source of truth and is written by the preferences form.
     try {

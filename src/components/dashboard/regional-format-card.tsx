@@ -12,14 +12,16 @@ export async function RegionalFormatCard({ locale }: { locale: Locale }) {
   const t = await getTranslations("dashboard.localeShowcase");
   const config = getLocaleConfig(locale);
 
+  // Fixed reference points, not Date.now(): the card is a sample, and a pure
+  // render keeps the output identical between server and client.
   const sampleDate = new Date("2026-03-14T09:30:00Z");
-  const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+  const relativeNow = new Date("2026-03-17T09:30:00Z");
 
   const rows = [
     { label: t("amount"), value: formatCurrency(1250.5, locale) },
     { label: t("number"), value: formatNumber(1234567.89, locale) },
     { label: t("date"), value: formatDate(sampleDate, locale, "long") },
-    { label: t("relative"), value: formatRelativeTime(threeDaysAgo, locale) },
+    { label: t("relative"), value: formatRelativeTime(sampleDate, locale, relativeNow) },
   ];
 
   return (
