@@ -132,6 +132,30 @@ Hot reload works: the project is bind-mounted, while `node_modules` and `.next`
 stay in named volumes so the container's own native binaries are not shadowed by
 the host's.
 
+### Troubleshooting
+
+**`ports are not available: ... bind: address already in use`** — something else
+holds port 3000, usually a `next dev` left running outside Docker. Find and stop
+it, or change the host port in `docker-compose.yml` (`"3001:3000"`).
+
+```bash
+# macOS / Linux
+lsof -ti:3000 | xargs kill
+
+# Windows (PowerShell)
+Get-NetTCPConnection -LocalPort 3000 -State Listen |
+  Select-Object -ExpandProperty OwningProcess -Unique |
+  ForEach-Object { Stop-Process -Id $_ -Force }
+```
+
+**The build fails partway through `npm ci`** with an `rpc error` or `EOF` — that
+is the Docker daemon dropping the connection, not a problem with the image. Run
+`docker compose build app` again.
+
+**`AUTH_SECRET` is empty** — the app returns 500 on any auth route with
+`MissingSecret` in the logs. `.env.example` ships the key blank on purpose;
+generate a value with the command above.
+
 ---
 
 ## Quick start (without Docker)
@@ -514,9 +538,6 @@ redirected away from `/login` and `/register` instead.
 - **No rate limiting** on the credentials endpoint. Login does run a constant-time
   bcrypt comparison even for unknown emails, so response time does not reveal
   which addresses are registered — but a proper limiter belongs in front of it.
-- **The Docker app image build was not verified end to end** in this environment;
-  the Postgres service and every local workflow were. If `docker compose build`
-  fails on your machine, the non-Docker quick start is a complete alternative.
 - **Auth.js v5 is still a beta.** It is the only line compatible with the App
   Router, and it is contained behind `src/lib/auth/`.
 
